@@ -80,8 +80,9 @@ public class FixedClass {
 		    }
 		
 		}
-		catch (java.util.InputMismatchException a) {
-			System.out.print("Entrada inválida! Caracteres proibidos\n");
+		catch (java.util.NoSuchElementException a) {
+			System.out.print("Não foi recebida a entrada devida!Programa encerrado.\n");
+			break;
 		}
 	}
 }

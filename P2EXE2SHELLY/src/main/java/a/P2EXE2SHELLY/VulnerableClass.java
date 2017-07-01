@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class VulnerableClass {
 	public void vulnerableMethod(String FILENAME){
 		while (true) {
+			
 		    Scanner console = new Scanner(System.in);  // console não é fechado
 		    System.out.print("Digite a operacao desejada para realizar no arquivo <R para ler um arquivo, "
 		    		+ "W para escrever em um arquivo>? ");
@@ -17,7 +18,7 @@ public class VulnerableClass {
 		    String opr= console.nextLine();				// opr pode ser usada fora do if
 			
 		    if (opr.equals("R")){
-				BufferedReader br = null;
+				BufferedReader br = null;				// buffer reader e file reader não são fechados
 				FileReader fr = null;
 				
 				try {
@@ -25,7 +26,7 @@ public class VulnerableClass {
 					fr = new FileReader(FILENAME);
 					br = new BufferedReader(fr);
 
-					String sCurrentLine;
+					String sCurrentLine;				// não é necessário declarar essa string fora
 
 					br = new BufferedReader(new FileReader(FILENAME));
 
@@ -40,7 +41,7 @@ public class VulnerableClass {
 				} 
 			}
 			
-			else {
+			else {												// pode colocar qualquer outra entrada
 				  BufferedWriter buffWrite;
 				  
 				  try {

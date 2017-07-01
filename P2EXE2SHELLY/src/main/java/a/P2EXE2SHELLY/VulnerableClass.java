@@ -10,22 +10,22 @@ import java.util.Scanner;
 public class VulnerableClass {
 	public void vulnerableMethod(String FILENAME){
 		while (true) {
-		    Scanner console = new Scanner(System.in);      // scanner n�o � fechado
+		    Scanner console = new Scanner(System.in);  // console não é fechado
 		    System.out.print("Digite a operacao desejada para realizar no arquivo <R para ler um arquivo, "
 		    		+ "W para escrever em um arquivo>? ");
 			
-		    String opr= console.nextLine();			// opr pode ser chamado fora do if
+		    String opr= console.nextLine();				// opr pode ser usada fora do if
 			
 		    if (opr.equals("R")){
-				BufferedReader br = null;  // podem ser usados fora do try
+				BufferedReader br = null;
 				FileReader fr = null;
 				
 				try {
 
 					fr = new FileReader(FILENAME);
-					br = new BufferedReader(fr);  // uso de declara��o dupla de br
+					br = new BufferedReader(fr);
 
-					String sCurrentLine;   // pode ser usada fora do while
+					String sCurrentLine;
 
 					br = new BufferedReader(new FileReader(FILENAME));
 
@@ -41,7 +41,7 @@ public class VulnerableClass {
 			}
 			
 			else {
-				  BufferedWriter buffWrite;   //buffWrite pode ser usado fora do try
+				  BufferedWriter buffWrite;
 				  
 				  try {
 					buffWrite = new BufferedWriter(new FileWriter(FILENAME));

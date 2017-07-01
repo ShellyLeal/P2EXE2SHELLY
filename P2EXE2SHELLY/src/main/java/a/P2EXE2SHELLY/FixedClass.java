@@ -8,23 +8,18 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class FixedClass {
-	public void fixedMethod(String FILENAME){
+	public final void fixedMethod(String FILENAME){
 		while (true) {
-		    Scanner console = new Scanner(System.in);
+		    final Scanner console = new Scanner(System.in);
 		    System.out.print("Digite a operacao desejada para realizar no arquivo <R para ler um arquivo, "
 		    		+ "W para escrever em um arquivo, "+ "S para sair>: ");
 		    try {
-		    String opr= console.nextLine();				// protegido com try/catch contra entradas proibidas
-		    if (opr.equals("R")){
+		    final String opr = console.nextLine();				// protegido com try/catch contra entradas proibidas
+		    if ("R".equals(opr)){
 				BufferedReader br = null;				
-				FileReader fr = null;
 				
 				try {
-
-					fr = new FileReader(FILENAME);
-					br = new BufferedReader(fr);
-
-					String sCurrentLine;				
+					String sCurrentLine = null;				
 
 					br = new BufferedReader(new FileReader(FILENAME));
 
@@ -36,15 +31,12 @@ public class FixedClass {
 
 					e.printStackTrace();
 
-				}finally {
+				}finally {										// fecha BufferedReader e FileReader
 
 					try {
 
 						if (br != null)
 							br.close();
-
-						if (fr != null)
-							fr.close();
 
 					} catch (IOException ex) {
 
@@ -55,7 +47,7 @@ public class FixedClass {
 				}
 				
 			}
-		    else if (opr.equals("W")) {
+		    else if ("W".equals(opr)) {
 		    	BufferedWriter buffWrite = null;	
 				  try {
 					buffWrite = new BufferedWriter(new FileWriter(FILENAME));
@@ -78,7 +70,7 @@ public class FixedClass {
 
 				}
 			}
-		    else if (opr.equals("S")){
+		    else if ("S".equals(opr)){
 		    	console.close();
 		    	System.out.print("Programa finalizado.");
 		    	break;

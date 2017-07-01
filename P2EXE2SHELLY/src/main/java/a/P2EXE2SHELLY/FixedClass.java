@@ -13,9 +13,10 @@ public class FixedClass {
 		    Scanner console = new Scanner(System.in);
 		    System.out.print("Digite a operacao desejada para realizar no arquivo <R para ler um arquivo, "
 		    		+ "W para escrever em um arquivo, "+ "S para sair>: ");
-		    String opr= console.nextLine();	
+		    try {
+		    String opr= console.nextLine();				// protegido com try/catch contra entradas proibidas
 		    if (opr.equals("R")){
-				BufferedReader br = null;				// buffer reader e file reader não são fechados
+				BufferedReader br = null;				
 				FileReader fr = null;
 				
 				try {
@@ -23,7 +24,7 @@ public class FixedClass {
 					fr = new FileReader(FILENAME);
 					br = new BufferedReader(fr);
 
-					String sCurrentLine;				// não é necessário declarar essa string fora
+					String sCurrentLine;				
 
 					br = new BufferedReader(new FileReader(FILENAME));
 
@@ -35,18 +36,47 @@ public class FixedClass {
 
 					e.printStackTrace();
 
-				} 
+				}finally {
+
+					try {
+
+						if (br != null)
+							br.close();
+
+						if (fr != null)
+							fr.close();
+
+					} catch (IOException ex) {
+
+						ex.printStackTrace();
+
+					}
+
+				}
+				
 			}
 		    else if (opr.equals("W")) {
-				  
+		    	BufferedWriter buffWrite = null;	
 				  try {
-					BufferedWriter buffWrite = new BufferedWriter(new FileWriter(FILENAME));
+					buffWrite = new BufferedWriter(new FileWriter(FILENAME));
 					System.out.println("Escreva algo: ");
 				    buffWrite.append(console.nextLine() + "\n");
-				    buffWrite.close();
 				} catch (IOException e) {
 					e.printStackTrace();
-				} 
+				} finally {
+
+					try {
+
+						if (buffWrite != null)
+							buffWrite.close();
+
+					} catch (IOException ex) {
+
+						ex.printStackTrace();
+
+					}
+
+				}
 			}
 		    else if (opr.equals("S")){
 		    	console.close();
@@ -58,5 +88,9 @@ public class FixedClass {
 		    }
 		
 		}
+		catch (java.util.InputMismatchException a) {
+			System.out.print("Entrada inválida! Caracteres proibidos\n");
+		}
 	}
+}
 }
